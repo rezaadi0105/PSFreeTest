@@ -2,6 +2,7 @@ CACHE MANIFEST
 #VERSION 1.1 
 
 CACHE: 
+BG.jpg
 config.js
 goldhen.bin
 index.html
