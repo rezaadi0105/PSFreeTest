@@ -1,6 +1,8 @@
 const ckbaj = document.getElementById('ckbaj');
+const ckbdc = document.getElementById('ckbdc');
 const visibleDiv = localStorage.getItem('visibleDiv') || 'jailbreak-page';
 const savedaj = localStorage.getItem('autojbstate');
+const savedc = localStorage.getItem('dbugc');
 const menuBtns = document.querySelectorAll('.menu-btn');
 const psBtns = document.querySelectorAll('.ps-btn');
 const plsbtn = document.querySelectorAll('.button-container button');
@@ -50,6 +52,16 @@ ckbaj.addEventListener('change', (e) => {
   onCheckboxChange(e.target.checked);
 });
 
+ckbdc.addEventListener('change', (e) => {
+  localStorage.setItem('dbugc', e.target.checked);
+  onCheckboxChange(e.target.checked);
+  if (ckbdc.checked) {
+    document.getElementById('DebugConsole').style.display  = 'flex';
+  } else {
+    document.getElementById('DebugConsole').style.display = 'none';
+  }
+});
+
 function isHttps() {
   return window.location.protocol === 'https:';
 }
@@ -66,7 +78,7 @@ async function loadMultipleModules(files) {
 }
 
 function showabout() {
-  document.getElementById('about-popup').style.display = 'block'; // Show popup
+  document.getElementById('about-popup').style.display = 'flex'; // Show popup
   document.getElementById('overlay-popup').style.display = 'block'; // Show overlay
 }
 
@@ -76,7 +88,7 @@ function closeabout() {
 }
 
 function showsettings() {
-  document.getElementById('settings-popup').style.display = 'block'; // Show popup
+  document.getElementById('settings-popup').style.display = 'flex'; // Show popup
   document.getElementById('overlay-popup').style.display = 'block'; // Show overlay
 }
 
@@ -288,6 +300,12 @@ function loadajbsettings(){
     ckbaj.checked = savedaj === 'true';
     onCheckboxChange(ckbaj.checked);
   }
+
+  if (savedc !== null){
+    ckbdc.checked = savedc === 'true';
+    onCheckboxChange(ckbdc.checked);
+  }
+
   if (ckbaj.checked) {
     if (sessionStorage.getItem('jbsuccess')) {
       console.log('Aleardy jailbroken !');
@@ -298,6 +316,12 @@ function loadajbsettings(){
         jailbreak();
       }, 3000);
     }
+  }
+
+  if (ckbdc.checked) {
+    document.getElementById('DebugConsole').style.display  = 'flex';
+  } else {
+    document.getElementById('DebugConsole').style.display = 'none';
   }
 
   if (isHttps()) {
