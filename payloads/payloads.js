@@ -277,3 +277,9 @@ export function load_Oysters124(){
 export function load_Oysters129(){
     Loadpayloadlocal("./payloads/Bins/RDR2/OystersMenu-1.29-FREE.bin");
 }
+
+// AppCache
+
+export function load_AppCache(){
+    Loadpayloadlocal("./payloads/Bins/Tools/appcache-install.bin");
+}

@@ -117,8 +117,10 @@
     <div class="overlay" id="overlay-popup"></div>
     <div class="popup" id="about-popup">
       <h2>About PSFree</h2>
-      <p>Version: 1.5.0</p>
-      <p>A simple web interface for PS4 jailbreak.</p>
+      <div>
+        <p>Version: 1.5.1</p>
+        <p>A simple web interface for PS4 jailbreak.</p>
+      </div>
       <button  onclick="closeabout()" class="close-btn" id="close-about">Close</button>
     </div>
 
@@ -126,20 +128,47 @@
     <div class="overlay" id="overlay-popup"></div>
     <div class="popup" id="settings-popup">
       <h2>Settings PSFree</h2>
-      <p>PS4 firmware supported:</p>
-      <p>- 9.00</p>
-      <p>Choose you'r flavor :</p>
-      <label>
-        <input type="radio" name="hen" value="GoldHEN" onchange="savejbflavor(); choosejb('GoldHEN')"> GoldHEN
-      </label>
-      <label>
-        <input type="radio" name="hen" value="HEN" onchange="savejbflavor(); choosejb('HEN')"> HEN
-      </label>
-      <label id="autojbchkb">
-        <input type="checkbox" id="ckbaj" />
-        <p id="agtext">Auto-Jailbreak</p>
-      </label>
-      <button  onclick="closesettings()" class="close-btn" id="close-settings">Close</button>
+
+      <div id="PS4FWOK">
+        <h3>PS4 Firmwares supported</h3>
+        <div id="listfw">
+            <p>8.00 (soon)</p>
+            <p>8.01 (soon)</p>
+            <p>8.03 (soon)</p>
+            <p>8.50 (soon)</p>
+            <p>8.52 (soon)</p>
+            <p>9.00</p>
+            <p>9.03 (soon)</p>
+            <p>9.04 (soon)</p>
+            <p>9.50 (soon)</p>
+            <p>9.51 (soon)</p>
+            <p>9.60 (soon)</p>
+        </div>
+        
+      </div>
+
+      <div id="choosejb">
+        <h3>Choose your flavor</h3>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="hen" value="GoldHEN" onchange="savejbflavor(); choosejb('GoldHEN')"> GoldHEN
+          </label>
+          <label>
+            <input type="radio" name="hen" value="HEN" onchange="savejbflavor(); choosejb('HEN')"> HEN
+          </label>
+        </div>
+        <label id="autojbchkb">
+          <input type="checkbox" id="ckbaj" />
+          <p id="agtext">Auto-Jailbreak</p>
+        </label>
+        <label id="debugconsolechkb">
+          <input type="checkbox" id="ckbdc" checked />
+          <p id="agtext">Enable Debug Console</p>
+        </label>
+      </div>
+
+      <button onclick="closesettings()" class="close-btn" id="close-settings">Close</button>
+      <button data-func="load_AppCache" class="install-psfrl" id="install-psfrl">Install PSFree-Lite</button>
     </div>
 
     <script src='./js/index.js'></script>

@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v1
-# Generated on 2025-06-02 20:54:48.408840
+# Generated on 2025-06-05 21:12:36.676698
 
 CACHE:
 index.html
@@ -34,6 +34,7 @@ payloads/Bins/RDR2/OystersMenu-1.19-FREE.bin
 payloads/Bins/RDR2/OystersMenu-1.24-FREE.bin
 payloads/Bins/RDR2/OystersMenu-1.29-FREE.bin
 payloads/Bins/Tools/app2usb.bin
+payloads/Bins/Tools/appcache-install.bin
 payloads/Bins/Tools/backupdb.bin
 payloads/Bins/Tools/disableaslr.bin
 payloads/Bins/Tools/disableupdates.bin
