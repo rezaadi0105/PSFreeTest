@@ -1984,5 +1984,12 @@ kexploit().then((success) => {
     } else {
       runPayload(window.payload_path);
     }
+    // moved from Jailbreak.js
+    setTimeout(() => {
+      sessionStorage.setItem('jbsuccess', 1);
+      document.getElementById('jailbreak').style.display = 'flex';
+      document.getElementById('loader').style.display = 'none';
+      window.location.reload();
+    }, 3000); // 3 seconds delay
   }
 });

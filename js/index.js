@@ -108,8 +108,7 @@ function CheckFW() {
   ];
 
   if (ps4Regex.test(userAgent)) {
-    const firmwareMatch = userAgent.match(/PlayStation 4\/([\d.]+)/);
-    const fwVersion = firmwareMatch ? firmwareMatch[1] : null;
+    const fwVersion = navigator.userAgent.substring(navigator.userAgent.indexOf('5.0 (') + 19, navigator.userAgent.indexOf(') Apple')).replace("layStation 4/",""); // Universal, credits to Kameleon
 
     if (fwVersion === '9.00' || fwVersion === '9.03' || fwVersion === '9.60') {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Compatible`;
