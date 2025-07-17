@@ -75,12 +75,7 @@ function Loadpayloadlocal(PLfile){ //Loading Payload via Payload Param.
 
 function Loadpayloadonline(PLfile) {
     window.payload_path = PLfile;
-    setTimeout(() => {
-        sessionStorage.setItem('jbsuccess', 1);
-        document.getElementById('jailbreak').style.display = 'flex';
-        document.getElementById('loader').style.display = 'none';
-        window.location.reload();
-    }, 3000); // 3 seconds delay
+    // timeout is moved to lapse.mjs to execute after exploit success
 }
 
 // Payloads
