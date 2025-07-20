@@ -1715,6 +1715,8 @@ export async function kexploit() {
         return new Promise(() => {});
     }
 
+    payloadSuccess();
+
     // If setuid is successful, we dont need to run the kexploit again
     try {
         if (sysi('setuid', 0) == 0) {
@@ -1816,6 +1818,18 @@ function malloc(sz) {
         return ptr;
     }
 
+function payloadSuccess(){
+  // moved from Jailbreak.js
+  setTimeout(() => {
+    sessionStorage.setItem('jbsuccess', 1);
+    // If true, then GoldHEN/HEN is loaded. Replace loader with jailbreak element(PS Logo).
+    if (document.getElementById('loader').style.display == 'flex'){
+      document.getElementById('jailbreak').style.display = 'flex';
+      document.getElementById('loader').style.display = 'none';
+    }
+    window.location.reload();
+  }, 3000); // 3 seconds delay
+}
 
 kexploit().then(() => {
     
@@ -1839,9 +1853,4 @@ kexploit().then(() => {
         payload_loader,
         payload_buffer,
     );
-
-
-    
-
-
 })
