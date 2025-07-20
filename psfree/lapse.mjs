@@ -1828,7 +1828,7 @@ function payloadSuccess(){
       document.getElementById('loader').style.display = 'none';
     }
     window.location.reload();
-  }, 3000); // 3 seconds delay
+  }, 1000); // 1 seconds delay
 }
 
 kexploit().then(() => {
