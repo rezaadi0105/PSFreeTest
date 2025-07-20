@@ -36,6 +36,7 @@ payloads/Bins/RDR2/OystersMenu-1.29-FREE.bin
 payloads/Bins/Tools/app2usb.bin
 payloads/Bins/Tools/backupdb.bin
 payloads/Bins/Tools/disableaslr.bin
+payloads/Bins/Tools/enableaslr.bin
 payloads/Bins/Tools/disableupdates.bin
 payloads/Bins/Tools/enable-browser.bin
 payloads/Bins/Tools/enableupdates.bin
