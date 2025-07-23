@@ -250,7 +250,7 @@ async function uaf_ssv(fsets, index, index2) {
         const idx = is_input ? 0 : 1;
         log(`${target.id} blur came`);
 
-        if (blurs[idx] > 0)  {
+        if (blurs[idx] > 1)  {
             die(`${name}: multiple blurs. blurs: ${blurs[idx]}`);
         }
 
