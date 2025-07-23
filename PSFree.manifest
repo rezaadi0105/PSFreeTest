@@ -56,6 +56,7 @@ payloads/Bins/Tools/ftp.bin
 payloads/Bins/Tools/kernel-clock.bin
 payloads/Bins/Tools/Orbis-Toolbox-900.bin
 payloads/Bins/Tools/permanent-uart.bin
+payloads/Bins/Tools/ps4-psfree-fix.bin
 payloads/Bins/Tools/ps4debug.bin
 payloads/Bins/Tools/pup-decrypt.bin
 payloads/Bins/Tools/restore.bin
