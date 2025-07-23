@@ -1604,7 +1604,8 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     kmem.write64(sysent_661.add(8), sy_call);
     // .sy_thrcnt = SY_THR_STATIC
     kmem.write32(sysent_661.add(0x2c), sy_thrcnt);
-    sessionStorage.setItem('jbsuccess', 1);
+    localStorage.ExploitLoaded="yes"
+    sessionStorage.ExploitLoaded="yes";
     //alert("kernel exploit succeeded!");
 }
 
@@ -1697,19 +1698,17 @@ export async function kexploit() {
     await init();
     const _init_t2 = performance.now();
 
-    if(sessionStorage.getItem('binloader')){
+    try {
+        chain.sys('setuid', 0);
+        }
+    catch (e) {
+        localStorage.ExploitLoaded = "no";
+    }
+
+    if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded!="yes") {
         runBinLoader();
         return new Promise(() => {});
     }
-
-    // If setuid is successful, we dont need to run the kexploit again
-    try {
-        if (sysi('setuid', 0) == 0) {
-            log("Not running kexploit again.")
-            return;
-        }
-    }
-    catch (e) {}
 
     // fun fact:
     // if the first thing you do since boot is run the web browser, WebKit can
