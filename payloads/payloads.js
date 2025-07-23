@@ -91,11 +91,11 @@ export function HEN(){
 // Dumpers
 
 export function load_AppDumper(){
-    Loadpayloadlocal("./payloads/Bins/Dumper/appdumper.bin");
+    Loadpayloadlocal("./payloads/Bins/Dumper/app-dumper.bin");
 }
 
 export function load_KernelDumper(){
-    Loadpayloadlocal("./payloads/Bins/Dumper/kerneldumper.bin");
+    Loadpayloadlocal("./payloads/Bins/Dumper/kernel-dumper.bin");
 }
 
 export function load_VTXDumper(){
@@ -103,7 +103,7 @@ export function load_VTXDumper(){
 }
 
 export function load_ModuleDumper(){
-    Loadpayloadlocal("./payloads/Bins/Dumper/moduledumper.bin");
+    Loadpayloadlocal("./payloads/Bins/Dumper/module-dumper.bin");
 
 }
 
@@ -120,27 +120,27 @@ export function load_App2USB(){
 
 
 export function load_BackupDB(){
-    Loadpayloadlocal("./payloads/Bins/Tools/backupdb.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/backup.bin");
 }
 
 export function load_RestoreDB(){
-    Loadpayloadlocal("./payloads/Bins/Tools/exitidu.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/restore.bin");
 }
 
 export function load_DisableASLR(){
-    Loadpayloadlocal("./payloads/Bins/Tools/disableaslr.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/disable-aslr.bin");
 }
 
 export function load_DisableUpdates(){
-    Loadpayloadlocal("./payloads/Bins/Tools/disableupdates.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/disable-updates.bin");
 }
 
 export function load_EnableUpdates(){
-    Loadpayloadlocal("./payloads/Bins/Tools/enbaleupdates.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/enable-updates.bin");
 }
 
 export function load_ExitIDU(){
-    Loadpayloadlocal("./payloads/Bins/Tools/exitidu.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/exit-idu.bin");
 }
   
 export function load_FTP(){
@@ -148,20 +148,20 @@ export function load_FTP(){
 }
   
 export function load_HistoryBlocker(){
-    Loadpayloadlocal("./payloads/Bins/Tools/historyblocker.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/history-blocker.bin");
 }
   
 export function load_RIFRenamer(){
-    Loadpayloadlocal("./payloads/Bins/Tools/rifrenamer.bin");
+    Loadpayloadlocal("./payloads/Bins/Tools/rif-renamer.bin");
 }
   
-export function load_Orbis(){
-    Loadpayloadlocal("./payloads/Bins/Tools/Orbis-Toolbox-900.bin");
-}
+// export function load_Orbis(){
+//     Loadpayloadlocal("./payloads/Bins/Tools/Orbis-Toolbox-900.bin");
+// }
 
-export function load_WebrRTE(){
-    Loadpayloadlocal("./payloads/Bins/Tools/WebRTE_900.bin");
-}
+// export function load_WebrRTE(){
+//     Loadpayloadlocal("./payloads/Bins/Tools/WebRTE_900.bin");
+// }
 
 export function load_ToDex(){
     Loadpayloadlocal("./payloads/Bins/Tools/ToDex.bin");
@@ -194,25 +194,74 @@ export function load_PUPDecrypt(){
 // Linux
 
 export function load_Linux(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900.bin");
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-1gb.bin`);
 }
 
 export function load_Linux2gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-2gb.bin");
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-2gb.bin`);
 }
 
 export function load_Linux3gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-3gb.bin");
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-3gb.bin`);
 }
 
 export function load_Linux4gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-4gb.bin");
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-4gb.bin`);
 }
 
-export function load_Linux5gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-5gb.bin");
+// Linux-PRO
+
+export function load_Linux_PRO(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-1gb-pro.bin`);
 }
 
+export function load_Linux2gb_PRO(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-2gb-pro.bin`);
+}
+
+export function load_Linux3gb_PRO(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-3gb-pro.bin`);
+}
+
+export function load_Linux4gb_PRO(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-4gb-pro.bin`);
+}
+
+// Linux-Baikal
+
+export function load_Linux_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-1gb-baikal.bin`);
+}
+
+export function load_Linux2gb_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-2gb-baikal.bin`);
+}
+
+export function load_Linux3gb_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-3gb-baikal.bin`);
+}
+
+export function load_Linux4gb_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-4gb-baikal.bin`);
+}
+
+// Linux-Baikal-PRO
+
+export function load_Linux_PRO_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-1gb-pro-baikal.bin`);
+}
+
+export function load_Linux2gb_PRO_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-2gb-pro-baikal.bin`);
+}
+
+export function load_Linux3gb_PRO_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-3gb-pro-baikal.bin`);
+}
+
+export function load_Linux4gb_PRO_Baikal(){
+    Loadpayloadlocal(`./payloads/Bins/Linux/payload-900-4gb-pro-baikal.bin`);
+}
 
 // Mod Menu
 
