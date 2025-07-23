@@ -307,11 +307,15 @@ function loadajbsettings(){
   }
 
   if (ckbaj.checked) {
+    const console = document.getElementById("console");
     if (sessionStorage.getItem('jbsuccess')) {
-      console.log('Aleardy jailbroken !');
+      console.append(`Aleardy jailbroken !\n`);
+      console.scrollTop = console.scrollHeight;
     } else {
       document.getElementById('jailbreak').style.display = 'none';
       document.getElementById('loader').style.display = 'flex';
+      console.append(`Auto jailbreaking... Please wait for a few seconds.\n`);
+      console.scrollTop = console.scrollHeight;
       setTimeout(() => {
         jailbreak();
       }, 3000);
@@ -429,10 +433,10 @@ async function Loadpayloads(payload) {
 }
 
 function loadsettings() {
+  CheckFW();
   loadajbsettings();
   loadjbflavor();
   checksettings();
-  CheckFW();
 }
 
 function onCheckboxChange(checked) {

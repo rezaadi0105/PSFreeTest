@@ -41,9 +41,9 @@
     
     <div id="payloads-page" style="display: none;">
       <nav class="floating-menu-payloads">
-        <button onclick="showtoolspayloads()">Tools</button>
-        <button onclick="showgamepayloads()">Games</button>
-        <button onclick="showlinuxpayloads()">Linux</button>
+        <button id="toolb" onclick="showtoolspayloads()">Tools</button>
+        <button id="gameb" onclick="showgamepayloads()">Games</button>
+        <button id="linuxb" onclick="showlinuxpayloads()">Linux</button>
       </nav>
       <div id="payloads-tools" style="display: block;">
         <h2 id="tools">Tools</h2>
@@ -58,7 +58,7 @@
             <button data-func="load_FTP">FTP</button>
             <button data-func="load_HistoryBlocker">History-Blocker</button>
             <button data-func="load_KernelClock">Kernel-Clock</button>
-            <button data-func="load_Orbis">Orbis-Toolbox</button>
+            <!--<button data-func="load_Orbis">Orbis-Toolbox</button>-->
             <button data-func="load_PS4Debug">PS4-Debug</button>
             <button data-func="load_ToDex">ToDex</button>
             <button data-func="load_ToDev">ToDev</button>
@@ -70,7 +70,7 @@
             <button data-func="load_ExitIDU">ExitIDU</button>
             <button data-func="load_DisableASLR">Disable-ASLR</button>
             <button data-func="load_ModuleDumper">Module-Dumper</button>
-            <button data-func="load_WebrRTE">WebRTE</button>
+            <!--<button data-func="load_WebrRTE">WebRTE</button>-->
             <button data-func="load_PermanentUART">Permanent-UART</button>
             <button data-func="load_PUPDecrypt">PUP-Decrypt</button>
           </div>
