@@ -112,6 +112,7 @@ function CheckFW() {
     if (fwVersion === '9.00') {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Compatible`;
       document.getElementById('PS4FW').style.color = 'green';
+      document.getElementById('install-psfrf').style.display = 'flex';
     } else if (fwVersion === '9.03' || fwVersion === '9.60') {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | SOON !`;
       document.getElementById('PS4FW').style.color = 'orange';

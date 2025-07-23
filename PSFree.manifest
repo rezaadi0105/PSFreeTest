@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v1
-# Generated on 2025-07-23 21:31:07.052952
+# Generated on 2025-07-23 21:31:32.903352
 
 CACHE:
 index.html
@@ -41,6 +41,7 @@ payloads/Bins/Tools/backup.bin
 payloads/Bins/Tools/ToCex.bin
 payloads/Bins/Tools/permanent-uart.bin
 payloads/Bins/Tools/disable-aslr.bin
+payloads/Bins/Tools/ps4-psfree-fix.bin
 payloads/Bins/Tools/restore.bin
 payloads/Bins/Tools/enable-browser.bin
 payloads/Bins/Tools/Orbis-Toolbox-900.bin
