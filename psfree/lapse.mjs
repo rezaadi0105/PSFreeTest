@@ -987,7 +987,6 @@ function make_aliased_pktopts(sds) {
                 return pair;
             }
         }
-
     }
     die('failed to make aliased pktopts');
 }
@@ -1607,9 +1606,8 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     //alert("kernel exploit succeeded!");
     localStorage.ExploitLoaded="yes"
     sessionStorage.ExploitLoaded="yes";
+    localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
 }
-
-
 
 // FUNCTIONS FOR STAGE: SETUP
 

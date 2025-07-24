@@ -63,6 +63,31 @@ body {
 
 }
 
+.header3 {
+    z-index: 5;
+    position: fixed;
+    top: 15%;
+    left: 2%;
+    width: 100vw;
+    display: flex;
+    justify-content: left;
+    pointer-events: none;
+}
+
+.header-title3 {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 15px #FFB84D;
+    background: #00000000;
+    border-radius: 10px;
+    padding: 10px 48px;
+    pointer-events: auto;
+    border: 2px solid #00000000; 
+
+}
+
 .center-btn-wrap {
     position: absolute;
     left: 50%;
