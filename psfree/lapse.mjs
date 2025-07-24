@@ -987,7 +987,6 @@ function make_aliased_pktopts(sds) {
                 return pair;
             }
         }
-
     }
     die('failed to make aliased pktopts');
 }
@@ -1605,9 +1604,8 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     // .sy_thrcnt = SY_THR_STATIC
     kmem.write32(sysent_661.add(0x2c), sy_thrcnt);
     //alert("kernel exploit succeeded!");
+    localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
 }
-
-
 
 // FUNCTIONS FOR STAGE: SETUP
 

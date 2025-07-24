@@ -9,7 +9,7 @@ export function GoldHEN() {
             window.location.reload();
             }, 3000); // 3 seconds delay
         })
-    });   
+    });
 }
 
 export function HEN() {
@@ -23,5 +23,5 @@ export function HEN() {
             window.location.reload();
             }, 3000); // 3 seconds delay
         })
-    });   
+    });
 }

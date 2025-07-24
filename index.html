@@ -27,6 +27,10 @@
       <div class="header-title2" id="header-title2"><span id="date"></span>&nbsp;&nbsp;-&nbsp;&nbsp;<span id="clock"></span></div>
     </div>
 
+    <div class="header3">
+      <div class="header-title3" id="header-title3">Pass = <span style="color:green" id=passCounter></span>&nbsp;&nbsp;:&nbsp;&nbsp;Fail = <span style="color:red" id=failCounter></span></div>
+    </div>
+
     <pre id="update-results" style="white-space: pre-wrap; margin-top: 10px;"></pre>
 
     <h2 id="PS4FW">PS4 FW: 0.00 | Compatible</h2>
@@ -184,6 +188,16 @@
         document.getElementById("clock").innerHTML = (Hour+":"+Minute);
         }
       setInterval(showdate,0);
+    </script>
+    <script>
+        if (localStorage.passcount == null || localStorage.passcount == undefined) localStorage.passcount = 0;
+        if (localStorage.passCounter == null || localStorage.passCounter == undefined) {
+          passCounter.innerHTML = localStorage.passcount;
+        }
+        if (localStorage.failcount == null || localStorage.failcount == undefined) localStorage.failcount = 0;
+        if (localStorage.failCounter == null || localStorage.failCounter == undefined) {
+          failCounter.innerHTML = localStorage.failcount;
+        }
     </script>
 
   </body>
