@@ -23,6 +23,10 @@
       <div class="header-title" id="header-title">PSFree by Reza AP</div>
     </div>
 
+    <div class="header2">
+      <div class="header-title2" id="header-title2"><span id="date"></span>&nbsp;&nbsp;-&nbsp;&nbsp;<span id="clock"></span></div>
+    </div>
+
     <pre id="update-results" style="white-space: pre-wrap; margin-top: 10px;"></pre>
 
     <h2 id="PS4FW">PS4 FW: 0.00 | Compatible</h2>
@@ -166,5 +170,21 @@
     </div>
 
     <script src='./js/index.js'></script>
+    <script>
+      function showdate() {
+        var dt = new Date();
+        Hour= dt.getHours();
+        Minute= dt.getMinutes();
+        Day=dt.getDate();
+        Month=dt.getMonth()+1;
+        Year=dt.getFullYear();
+        if (Minute < 10) { Minute = "0" + Minute; };
+        if (Hour < 10) { Hour = "0" + Hour; };
+        document.getElementById("date").innerHTML = (Day+"/"+Month+"/"+Year);
+        document.getElementById("clock").innerHTML = (Hour+":"+Minute);
+        }
+      setInterval(showdate,0);
+    </script>
+
   </body>
 </html>
