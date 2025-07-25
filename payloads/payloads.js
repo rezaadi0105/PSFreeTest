@@ -241,6 +241,10 @@ export function load_Threshold80(){
 
 // GTA
 
+export function load_GTAArbic100(){
+    Loadpayloadlocal("./payloads/Bins/GTA/ArabicGuy-1.0-1.00-rfoodxmodz.bin");
+}
+
 export function load_GTAArbic127(){
     Loadpayloadlocal("./payloads/Bins/GTA/ArabicGuy-1.0-1.27-rfoodxmodz.bin");
 }
@@ -252,7 +256,6 @@ export function load_GTAArbic132(){
 export function load_GTAArbic133(){
     Loadpayloadlocal("./payloads/Bins/GTA/ArabicGuy-1.0-1.33-rfoodxmodz.bin");
 }
-
 
 export function load_GTABQ133(){
     Loadpayloadlocal("./payloads/Bins/GTA/BeefQueefMod-1.33.bin");
@@ -266,6 +269,34 @@ export function load_GTABQ138(){
     Loadpayloadlocal("./payloads/Bins/GTA/BeefQueefMod-1.38.bin");
 }
 
+export function load_GTABQ139(){
+    Loadpayloadlocal("./payloads/Bins/GTA/BeefQueefMod-1.39.bin");
+}
+
+export function load_GTABQ146(){
+    Loadpayloadlocal("./payloads/Bins/GTA/BeefQueefMod-1.46.bin");
+}
+
+export function load_GTABQ147(){
+    Loadpayloadlocal("./payloads/Bins/GTA/BeefQueefMod-1.47.bin");
+}
+
+export function load_GTAEM135(){
+    Loadpayloadlocal("./payloads/Bins/GTA/Expulsion-1.35.bin");
+}
+
+export function load_GTAEM138(){
+    Loadpayloadlocal("./payloads/Bins/GTA/Expulsion-1.38.bin");
+}
+
+export function load_GTALA138(){
+    Loadpayloadlocal("./payloads/Bins/GTA/Lamance-1.38.bin");
+}
+
+export function load_GTALTS127(){
+    Loadpayloadlocal("./payloads/Bins/GTA/LTS-1.27.bin");
+}
+
 export function load_GTAWM132(){
     Loadpayloadlocal("./payloads/Bins/GTA/WildeModz-1.32.bin");
 }
@@ -276,6 +307,14 @@ export function load_GTAWM134(){
 
 export function load_GTAWM138(){
     Loadpayloadlocal("./payloads/Bins/GTA/WildeModz-1.38.bin");
+}
+
+export function load_GTAWM146(){
+    Loadpayloadlocal("./payloads/Bins/GTA/WildeModz-1.46.bin");
+}
+
+export function load_GTAWM147(){
+    Loadpayloadlocal("./payloads/Bins/GTA/WildeModz-1.47.bin");
 }
 
 // RDR2
@@ -299,6 +338,10 @@ export function load_Oysters124(){
 
 export function load_Oysters129(){
     Loadpayloadlocal("./payloads/Bins/RDR2/OystersMenu-1.29-FREE.bin");
+}
+
+export function load_North129(){
+    Loadpayloadlocal("./payloads/Bins/RDR2/NorthMenu-1.29.bin");
 }
 
 // AppCache
