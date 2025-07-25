@@ -260,19 +260,19 @@ function showpayloads() {
 }
 
 function showtoolspayloads() {
-  document.getElementById('payloads-linux').style.display = 'none';
+  document.getElementById('payloads-threshold').style.display = 'none';
   document.getElementById('payloads-game').style.display = 'none';
   document.getElementById('payloads-tools').style.display = 'block';
 }
 
 function showgamepayloads() {
-  document.getElementById('payloads-linux').style.display = 'none';
+  document.getElementById('payloads-threshold').style.display = 'none';
   document.getElementById('payloads-game').style.display = 'block';
   document.getElementById('payloads-tools').style.display = 'none';
 }
 
-function showlinuxpayloads() {
-  document.getElementById('payloads-linux').style.display = 'block';
+function showthresholdpayloads() {
+  document.getElementById('payloads-threshold').style.display = 'block';
   document.getElementById('payloads-game').style.display = 'none';
   document.getElementById('payloads-tools').style.display = 'none';
 }

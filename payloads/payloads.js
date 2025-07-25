@@ -191,26 +191,50 @@ export function load_PUPDecrypt(){
     Loadpayloadlocal("./payloads/Bins/Tools/pup-decrypt.bin");
 }
 
-// Linux
+// Threshold
 
-export function load_Linux(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900.bin");
+export function load_Threshold60(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-60.bin");
 }
 
-export function load_Linux2gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-2gb.bin");
+export function load_Threshold62(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-62.bin");
 }
 
-export function load_Linux3gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-3gb.bin");
+export function load_Threshold64(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-64.bin");
 }
 
-export function load_Linux4gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-4gb.bin");
+export function load_Threshold66(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-66.bin");
 }
 
-export function load_Linux5gb(){
-    Loadpayloadlocal("./payloads/Bins/Linux/LinuxLoader-900-5gb.bin");
+export function load_Threshold68(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-68.bin");
+}
+
+export function load_Threshold70(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-70.bin");
+}
+
+export function load_Threshold72(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-72.bin");
+}
+
+export function load_Threshold74(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-74.bin");
+}
+
+export function load_Threshold76(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-76.bin");
+}
+
+export function load_Threshold78(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-78.bin");
+}
+
+export function load_Threshold80(){
+    Loadpayloadlocal("./payloads/Bins/Threshold/Threshold-80.bin");
 }
 
 // Mod Menu
