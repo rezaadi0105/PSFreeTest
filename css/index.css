@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: #222222;
+    background: #000000;
 }
 
 body {
@@ -90,7 +90,7 @@ body {
 
 #console {
     color: #FFF;
-    background-color: #6f707433;
+    background-color: #100F0F;
     border-radius: 18px;
     width: 90%;
     height: 18%;
