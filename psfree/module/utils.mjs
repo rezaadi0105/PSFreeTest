@@ -25,14 +25,12 @@ export class DieError extends Error {
 }
 
 export function die(msg='') {
-    localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
     throw new DieError(msg);
 }
 
 const console = document.getElementById('console');
 export function log(msg='') {
     console.append(msg + '\n');
-    console.scrollTop = console.scrollHeight;
 }
 
 export function clear_log() {

