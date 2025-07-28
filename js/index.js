@@ -355,7 +355,6 @@ async function jailbreak() {
     document.getElementById('jailbreak').style.display = 'none';
     document.getElementById('loader').style.display = 'flex';
     const modules = await loadMultipleModules([
-      '../payloads/Jailbreak.js',
       '../psfree/alert.mjs'
     ]);
     console.log("All modules are loaded!");
@@ -365,19 +364,19 @@ async function jailbreak() {
       if (JailbreakModule && typeof JailbreakModule.HEN === 'function') {
           JailbreakModule.HEN();
       } else {
-          console.error("HEN function not found in Jailbreak.js module");
+          console.error("HEN function not found in module");
       }
     } else if (localStorage.getItem('GoldHEN')) {
       if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
           JailbreakModule.GoldHEN();
       } else {
-          console.error("GoldHEN function not found in Jailbreak.js module");
+          console.error("GoldHEN function not found in module");
       }
     } else {
       if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
           JailbreakModule.GoldHEN();
       } else {
-          console.error("GoldHEN function not found in Jailbreak.js module");
+          console.error("GoldHEN function not found in module");
       }
     }
   } catch (e) {
@@ -389,7 +388,6 @@ async function binloader() {
   try {
     sessionStorage.setItem('binloader', 1);
     const modules = await loadMultipleModules([
-      '../payloads/Jailbreak.js',
       '../psfree/alert.mjs'
     ]);
     console.log("All modules are loaded!");
