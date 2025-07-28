@@ -72,14 +72,13 @@ function Loadpayloadlocal(PLfile){ //Loading Payload via Payload Param.
 // Load Payloads with exploit
 
 function Loadpayloadonline(PLfile) {
-    fetch(PLfile).then(res => {
-        res.arrayBuffer().then(arr => {
-            window.pld = new Uint32Array(arr);
-            setTimeout(() => {
-            window.location.reload();
-            }, 3000); // 3 seconds delay
-        });
-    });   
+    window.payload_path = PLfile;
+        sessionStorage.setItem('jbsuccess', 1);
+        document.getElementById('jailbreak').style.display = 'flex';
+        document.getElementById('loader').style.display = 'none';
+        setTimeout(() => {
+        window.location.reload();
+    }, 15000); // 15 seconds delay
 }
 
 // Payloads
