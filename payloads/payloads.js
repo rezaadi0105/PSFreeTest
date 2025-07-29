@@ -142,26 +142,18 @@ export function load_EnableUpdates(){
 export function load_ExitIDU(){
     Loadpayloadlocal("./payloads/Bins/Tools/exit-idu.bin");
 }
-  
+
 export function load_FTP(){
     Loadpayloadlocal("./payloads/Bins/Tools/ftp.bin");
 }
-  
+
 export function load_HistoryBlocker(){
     Loadpayloadlocal("./payloads/Bins/Tools/history-blocker.bin");
 }
-  
+
 export function load_RIFRenamer(){
     Loadpayloadlocal("./payloads/Bins/Tools/rif-renamer.bin");
 }
-  
-// export function load_Orbis(){
-//     Loadpayloadlocal("./payloads/Bins/Tools/Orbis-Toolbox-900.bin");
-// }
-
-// export function load_WebrRTE(){
-//     Loadpayloadlocal("./payloads/Bins/Tools/WebRTE_900.bin");
-// }
 
 export function load_ToDex(){
     Loadpayloadlocal("./payloads/Bins/Tools/ToDex.bin");
@@ -342,12 +334,6 @@ export function load_Oysters129(){
 
 export function load_North129(){
     Loadpayloadlocal("./payloads/Bins/RDR2/NorthMenu-1.29.bin");
-}
-
-// AppCache
-
-export function load_AppCache(){
-    Loadpayloadlocal("./payloads/Bins/Tools/appcache-install.bin");
 }
 
 // PSFree Fix
