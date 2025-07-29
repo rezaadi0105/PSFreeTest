@@ -353,8 +353,5 @@ export function load_AppCache(){
 // PSFree Fix
 
 export function load_PSFreeFix(){
-    const Confirmation = confirm("Are you sure you want to install the PSFree Fix? This will overwrite any existing files like GTA V/RDR2 mod plugins.");
-    if (Confirmation) {
-        Loadpayloadlocal("./payloads/Bins/Tools/ps4-psfree-fix.bin");
-    }
+    Loadpayloadlocal("./payloads/Bins/Tools/ps4-psfree-fix.bin");
 }
