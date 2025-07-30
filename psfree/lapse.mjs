@@ -1855,6 +1855,20 @@ var loader_addr = chain.sysp(
         payload_buffer,
     );	
    }
+   payloadSuccess();
  };
 
 })
+
+function payloadSuccess(){
+  // moved from Jailbreak.js
+  setTimeout(() => {
+    sessionStorage.setItem('jbsuccess', 1);
+    // If true, then GoldHEN/HEN is loaded. Replace loader with jailbreak element(PS Logo).
+    if (document.getElementById('loader').style.display == 'flex'){
+      document.getElementById('jailbreak').style.display = 'flex';
+      document.getElementById('loader').style.display = 'none';
+    }
+    window.location.reload();
+  }, 3000); // 3 seconds delay
+}
