@@ -1868,5 +1868,5 @@ function payloadSuccess(){
       document.getElementById('loader').style.display = 'none';
     }
     window.location.reload();
-  }, 3000); // 3 seconds delay
+  }, 5000); // 5 seconds delay
 }
