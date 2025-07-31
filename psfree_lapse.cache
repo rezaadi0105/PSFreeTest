@@ -1,30 +1,29 @@
-CACHE MANIFEST 
-# PSFree-Lapse
+CACHE MANIFEST
+# v1
+# Generated on 2025-07-31 16:51:44.744260
 
-about.html
-alert.mjs
+CACHE:
 cache.html
-config.mjs
 index.html
-lapse.mjs
-payload.bin
-psfree.mjs
-fonts\LiberationMono-Regular.ttf
-kpatch\900.elf
-module\chain.mjs
-module\constants.mjs
-module\int64.mjs
-module\mem.mjs
-module\memtools.mjs
-module\offset.mjs
-module\rw.mjs
-module\utils.mjs
-module\view.mjs
-rop\900.mjs
+other/btn.css
+other/favicon.ico
+payloads/payload.bin
+psfree/alert.mjs
+psfree/config.mjs
+psfree/psfree.mjs
+psfree/send.mjs
+psfree/lapse.mjs
+psfree/rop/900.mjs
+psfree/module/offset.mjs
+psfree/module/utils.mjs
+psfree/module/view.mjs
+psfree/module/rw.mjs
+psfree/module/memtools.mjs
+psfree/module/chain.mjs
+psfree/module/int64.mjs
+psfree/module/mem.mjs
+psfree/module/constants.mjs
+psfree/kpatch/900.elf
 
 NETWORK:
 *
-
-SETTINGS:
-prefer-online:
-

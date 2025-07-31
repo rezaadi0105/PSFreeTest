@@ -1522,7 +1522,7 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     // cr_sceCaps[1]
     kmem.write64(p_ucred.add(0x68), -1);
 
-    const buf = await get_patches('./kpatch/900.elf');
+    const buf = await get_patches('./psfree/kpatch/900.elf');
     // FIXME handle .bss segment properly
     // assume start of loadable segments is at offset 0x1000
     const patches = new View1(await buf, 0x1000);
@@ -1607,8 +1607,6 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     sessionStorage.ExploitLoaded="yes";
    //alert("kernel exploit succeeded!");
 }
-
-
 
 // FUNCTIONS FOR STAGE: SETUP
 
@@ -1697,17 +1695,17 @@ export async function kexploit() {
     await init();
     const _init_t2 = performance.now();
 
-     try {
+    try {
         chain.sys('setuid', 0);
         }
     catch (e) {
         localStorage.ExploitLoaded = "no";
     }
     
-     if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded!="yes") {
-           runBinLoader();
-            return new Promise(() => {});
-      }
+    if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded!="yes") {
+        runBinLoader();
+        return new Promise(() => {});
+    }
  
     // fun fact:
     // if the first thing you do since boot is run the web browser, WebKit can
@@ -1784,7 +1782,6 @@ export async function kexploit() {
     }
 }
 
-
 function malloc(sz) {
     var backing = new Uint8Array(0x10000 + sz);
     nogc.push(backing);
@@ -1831,7 +1828,7 @@ var loader_addr = chain.sysp(
 
  var req = new XMLHttpRequest();
  req.responseType = "arraybuffer";
- req.open('GET','payload.bin');
+ req.open('GET','./payloads/payload.bin');
  req.send();
  req.onreadystatechange = function () {
   if (req.readyState == 4) {
