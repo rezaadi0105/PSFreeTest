@@ -178,6 +178,10 @@ function allset(){
     msgs.innerHTML="PS4 Exploited And Payloads Loaded.";
 }
 
+function awaitpl() {
+    msgs.innerHTML="Payloads Already Loaded, BinLoader Is Ready.<br>Send A Payload To Port 9020 Now";
+}
+
 // #define SCE_KERNEL_AIO_STATE_NOTIFIED       0x10000
 //
 // #define SCE_KERNEL_AIO_STATE_SUBMITTED      1
@@ -1681,8 +1685,7 @@ function runBinLoader() {
         payload_loader,
         payload_buffer
     );
-
-    log('BinLoader is ready. Send a payload to port 9020 now');
+    awaitpl();
 }
 
 // overview:
