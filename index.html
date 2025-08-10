@@ -42,6 +42,10 @@ if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
     <div class="clockdate-title" id="clockdate-title"><span id="date"></span>&nbsp;&nbsp;-&nbsp;&nbsp;<span id="clock"></span></div>
   </div>
 
+  <div class="passfail">
+    <div class="passfail-title" id="passfail-title">Pass = <span style="color:green" id=passCounter></span>&nbsp;&nbsp;:&nbsp;&nbsp;Fail = <span style="color:red" id=failCounter></span></div>
+  </div>
+
   <script>
     function showdate() {
       const dt = new Date();
@@ -57,6 +61,17 @@ if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
       }
     setInterval(showdate,0);
   </script>
+
+  <script>
+      if (localStorage.passcount == null || localStorage.passcount == undefined) localStorage.passcount = 0;
+      if (localStorage.passCounter == null || localStorage.passCounter == undefined) {
+          passCounter.innerHTML = localStorage.passcount;
+      }
+      if (localStorage.failcount == null || localStorage.failcount == undefined) localStorage.failcount = 0;
+      if (localStorage.failCounter == null || localStorage.failCounter == undefined) {
+          failCounter.innerHTML = localStorage.failcount;
+      }
+   </script>
 
 </body>
 </html>
