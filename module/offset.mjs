@@ -20,6 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 // offsets for JSC::JSObject
 export const js_cell = 0;
 export const js_butterfly = 0x8;
+
 // start of the array of inline properties (JSValues)
 export const js_inline_prop = 0x10;
 
@@ -52,7 +53,6 @@ export const jsta_impl = 0x18;
 export const size_jsta = 0x20;
 
 // WebKit offsets end
-
 export const KB = 1024;
 export const MB = KB * KB;
 export const GB = KB * KB * KB;

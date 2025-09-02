@@ -4,11 +4,8 @@ PSFree is a collection of exploits for the PS4 console. The main focus of the
 repo is for the PS4 but we try to make things portable to PS5.
 
 * Exploits
-  * PSFree: src/psfree.mjs
-  * Lapse (kernel): src/scripts/lapse.mjs
-
-Donation (Monero/XMR):
-86Fk3X9AE94EGKidzRbvyiVgGNYD3qZnuKNq1ZbsomFWXHYm6TtAgz9GNGitPWadkS3Wr9uXoT29U1SfdMtJ7QNKQpW1CVS
+  * PSFree: psfree.mjs
+  * Lapse (kernel): lapse.mjs
 
 # COPYRIGHT AND AUTHORS:
 AGPL-3.0-or-later (see src/COPYING). This repo belongs to the group
