@@ -1,0 +1,30 @@
+CACHE MANIFEST
+# v1
+# Generated on 2025-09-11 15:15:35.385598
+
+CACHE:
+alert.mjs
+bg.jpg
+config.mjs
+favicon.ico
+cache.html
+style.css
+about.html
+psfree.mjs
+goldhen.bin
+index.html
+send.mjs
+lapse.mjs
+rop/900.mjs
+module/offset.mjs
+module/utils.mjs
+module/view.mjs
+module/rw.mjs
+module/memtools.mjs
+module/chain.mjs
+module/int64.mjs
+module/mem.mjs
+kpatch/900.elf
+
+NETWORK:
+*
