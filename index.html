@@ -16,24 +16,35 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <title>exploit</title>
-        <style>
-            @font-face {
-                font-family: 'logging';
-                src: url('fonts/LiberationMono-Regular.ttf');
-            }
-            #console {
-                font-family: 'logging';
-            }
-        </style>
-    </head>
-    <body>
-        PSFree: A PS4/PS5 Exploit Chain<br>
-        See <a href='./about.html' data-jslicense='1'>JavaScript license information</a> for the
-        source code and license.<br>
-        <pre id='console'></pre>
-    </body>
-    <script type='module' src='./alert.mjs'></script>
+<head>
+<title>PSFree-Lapse Exploit For PS4 9.00 By Reza A.P</title>
+<link rel="shortcut icon" href="favicon.ico"></link>
+<link rel="stylesheet" href="style.css">
+<style>
+body{background-image:url("bg.jpg");background-repeat:no-repeat;background-size:100%;background-position:center;background-color:black;color:white;font-size:28px;text-align:center;margin:0;overflow:hidden;}
+.info{position:relative;top:39%;}
+</style>
+
+<!-- Cache -->
+<script>
+if (window.applicationCache.status=='0')
+{
+  window.location.replace("cache.html");
+}
+</script>
+</head>
+
+<body onload="setTimeout(webkitExploit,1500);"><!--  -->
+  <!-- Message -->
+  <div id="msgs" class="info">Running Webkit Exploit, Please Wait ...</div>
+
+</body>
+
+<!-- Exploit -->
+<script>
+async function webkitExploit() 
+{
+ await import('./alert.mjs');
+}
+</script>
 </html>
