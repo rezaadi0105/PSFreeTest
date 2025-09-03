@@ -1583,6 +1583,8 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     log('setuid(0)');
     sysi('setuid', 0);
     log('kernel exploit succeeded!');
+    localStorage.ExploitLoaded="yes";
+    sessionStorage.ExploitLoaded="yes";
 }
 
 // FUNCTIONS FOR STAGE: SETUP
@@ -1629,6 +1631,17 @@ export async function kexploit() {
     const _init_t1 = performance.now();
     await init();
     const _init_t2 = performance.now();
+
+    try {
+        chain.sys('setuid', 0);
+        }
+    catch (e) {
+        localStorage.ExploitLoaded="no";
+    }
+
+    if (localStorage.ExploitLoaded=="yes" && sessionStorage.ExploitLoaded!="yes") {
+        return new Promise(() => {});
+    }
 
     // fun fact:
     // if the first thing you do since boot is run the web browser, WebKit can
