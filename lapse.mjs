@@ -96,6 +96,9 @@ const CPU_LEVEL_WHICH = 3;
 const CPU_WHICH_TID = 1;
 
 // sys/mman.h
+const PROT_READ = 1;
+const PROT_WRITE = 2;
+const PROT_EXEC = 4;
 const MAP_SHARED = 1;
 const MAP_FIXED = 0x10;
 
