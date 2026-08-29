@@ -1,4 +1,4 @@
-# PSFree WebKit Exploit & Lapse Kernel Exploit v2.3 for PS4
+# PSFree WebKit Exploit & Lapse Kernel Exploit for PS4
 
 A PSFree & Lapse exploit for PS4 firmware 7.00 to 9.60
 > ⚠️ This repository is for research and educational purposes only.
@@ -11,10 +11,6 @@ This repository is a research-focused fork of [PSFree](https://github.com/kmeps4
 2. **reduce platform compatibility requirements** by converting the existing `.mjs` modular structure into plain `.js`. The result is less modular structure but is more portable codebase.
 
 Through these changes, the original modular `.mjs` structure has been refactored into a single-file `.js` implementation designed to execute in a more sequential, `C-like` flow. This approach improves readability, simplifies debugging and ensures consistent execution timing across environments.
-
-<p align="center">
-  <img src="psfree_lapse_2.04.png" alt="PSFree" width="537" height="588"/>
-</p>
 
 ---
 
